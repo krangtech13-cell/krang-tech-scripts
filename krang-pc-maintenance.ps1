@@ -71,10 +71,11 @@ function Clear-Folder($path) {
         }
     }
     if (-not $DryRun) {
-        # Remove now-empty folders, deepest first
+        # Remove now-empty folders, deepest first (folders that still hold in-use files are left alone)
         Get-ChildItem -Path $path -Recurse -Force -Directory -ErrorAction SilentlyContinue |
             Sort-Object { $_.FullName.Length } -Descending |
-            ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue }
+            Where-Object { -not (Get-ChildItem -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue | Select-Object -First 1) } |
+            ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force -Confirm:$false -ErrorAction SilentlyContinue }
     }
     return $freed
 }
