@@ -24,10 +24,15 @@ Works on Windows 10 and 11 with the built-in PowerShell.
 ### How to run it
 
 1. Download `krang-pc-maintenance.ps1` (click the file above, then the download button).
-2. Right-click the Start button and choose **Terminal (Admin)**.
-3. Go to your Downloads folder:
+2. Open **Terminal (Admin)** (right-click the Start button) or **Command Prompt** as Administrator.
+3. Go to your Downloads folder.
+   In Terminal / PowerShell:
    ```
    cd $HOME\Downloads
+   ```
+   In Command Prompt:
+   ```
+   cd %USERPROFILE%\Downloads
    ```
 4. **Test it first (deletes nothing):**
    ```
